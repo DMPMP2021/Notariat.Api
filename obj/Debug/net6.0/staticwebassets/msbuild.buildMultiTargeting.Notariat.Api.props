@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Notariat.Api.props" />
-</Project>
