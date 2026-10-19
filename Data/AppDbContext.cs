@@ -49,7 +49,7 @@ public static class Seeder
     public static async Task SeedAsync(IServiceProvider sp)
     {
         var db = sp.GetRequiredService<AppDbContext>();
-        await db.Database.EnsureCreatedAsync();
+        await db.Database.MigrateAsync();
         var rm = sp.GetRequiredService<RoleManager<IdentityRole>>();
         var um = sp.GetRequiredService<UserManager<ApplicationUser>>();
         foreach (var r in Roles.All)
