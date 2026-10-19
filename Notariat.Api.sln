@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
@@ -23,3 +24,30 @@ Global
 		SolutionGuid = {B32F29F6-FC5D-4309-A218-679F59BD6188}
 	EndGlobalSection
 EndGlobal
+=======
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notariat.Api", "Notariat.Api.csproj", "{16F2B294-E6F7-4D84-BC34-4F3E9FCD0AFD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16F2B294-E6F7-4D84-BC34-4F3E9FCD0AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F2B294-E6F7-4D84-BC34-4F3E9FCD0AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F2B294-E6F7-4D84-BC34-4F3E9FCD0AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F2B294-E6F7-4D84-BC34-4F3E9FCD0AFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B32F29F6-FC5D-4309-A218-679F59BD6188}
+	EndGlobalSection
+EndGlobal
+>>>>>>> 5715d764d2c11eb1bb07a3db5b8535491ea62024

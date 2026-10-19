@@ -91,3 +91,4 @@ E:\notariat\backend\Notariat.Api\obj\Debug\net6.0\refint\Notariat.Api.dll
 E:\notariat\backend\Notariat.Api\obj\Debug\net6.0\Notariat.Api.pdb
 E:\notariat\backend\Notariat.Api\obj\Debug\net6.0\Notariat.Api.genruntimeconfig.cache
 E:\notariat\backend\Notariat.Api\obj\Debug\net6.0\ref\Notariat.Api.dll
+E:\notariat\backend\Notariat.Api\bin\Debug\net6.0\package-lock.json
