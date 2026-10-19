@@ -313,6 +313,25 @@ public class DeclarationsController : ControllerBase
         return Ok(ev);
     }
 
+    /// <summary>Actes enregistrés en attente de contrôle de réévaluation par le vérificateur.
+    /// Un acte est considéré « à réévaluer » s'il n'a pas encore été réévalué après son enregistrement
+    /// (date d'évaluation antérieure à la date d'enregistrement, ou aucune évaluation).</summary>
+    [HttpGet("a-reevaluer"), Authorize(Roles = Roles.Verificateur)]
+    public async Task<IActionResult> AReevaluer()
+    {
+        var q = Query().Where(d => d.Statut == StatutDeclaration.Enregistree
+            && (d.Evaluation == null || d.Evaluation.DateEvaluation < d.DateEnregistrement));
+        return Ok(await q.OrderByDescending(d => d.DateEnregistrement).ToListAsync());
+    }
+
+    /// <summary>Le vérificateur réévalue un acte déjà enregistré : il saisit un nouveau montant de référence.</summary>
+    [HttpPost("{id}/reevaluer"), Authorize(Roles = Roles.Verificateur)]
+    public async Task<IActionResult> Reevaluer(int id, EvaluationDto dto)
+    {
+        var ev = await _eval.ReevaluerAsync(id, dto.MontantReference, dto.Observation, UserId, User.FindFirstValue(ClaimTypes.Name) ?? "");
+        return Ok(ev);
+    }
+
     /// <summary>Liste de tous les actes (lecture seule) : inspecteur, receveur et vérificateur. Les brouillons des notaires n'y figurent pas.</summary>
     [HttpGet("tous"), Authorize(Roles = "Inspecteur,Receveur,Verificateur")]
     public async Task<IActionResult> Tous([FromQuery] StatutDeclaration? statut)

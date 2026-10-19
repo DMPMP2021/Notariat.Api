@@ -436,6 +436,9 @@ public class DeclarationService : IDeclarationService
         await tx.CommitAsync();
 
         await _notif.NotifierAsync(d.NotaireId, $"Acte {d.Reference} enregistré sous le n° {d.NumeroEnregistrement}", d.Id);
+        // Le vérificateur doit contrôler l'acte enregistré et décider d'une éventuelle réévaluation.
+        await _notif.NotifierRoleAsync(Roles.Verificateur,
+            $"Acte {d.Reference} enregistré (n° {d.NumeroEnregistrement}) : contrôle de réévaluation requis", d.Id);
         return d;
     }
 

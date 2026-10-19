@@ -142,12 +142,17 @@ public class DashboardController : ControllerBase
     {
         var mes = await _db.Evaluations.AsNoTracking().Where(e => e.VerificateurId == UserId).ToListAsync();
         var aEvaluer = await _db.Declarations.CountAsync(d => d.Statut == StatutDeclaration.Soumise && d.Evaluation == null);
+        // Actes enregistrés en attente de réévaluation (évaluation absente ou antérieure à l'enregistrement)
+        var aReevaluer = await _db.Declarations.AsNoTracking().Include(d => d.Evaluation)
+            .CountAsync(d => d.Statut == StatutDeclaration.Enregistree
+                && (d.Evaluation == null || d.Evaluation.DateEvaluation < d.DateEnregistrement));
         var debutMois = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
         var sous = mes.Where(e => e.Conclusion == ConclusionEvaluation.SousEvalue).ToList();
         var mois = DerniersMois();
         var kpis = new List<KpiDto>
         {
             new("aEvaluer", "Dossiers à évaluer", aEvaluer, "number", "File d'attente", aEvaluer > 0 ? "warn" : "ok"),
+            new("aReevaluer", "Actes à réévaluer", aReevaluer, "number", "Actes enregistrés à contrôler", aReevaluer > 0 ? "warn" : "ok"),
             new("ceMois", "Évalués ce mois", mes.Count(e => e.DateEvaluation >= debutMois), "number", "Par vous"),
             new("conformes", "Conformes", mes.Count(e => e.Conclusion == ConclusionEvaluation.Conforme), "number", "Montant conforme à la référence", "ok"),
             new("sous", "Sous-évalués", sous.Count, "number", "Déclaré < référence", sous.Any() ? "danger" : null),
